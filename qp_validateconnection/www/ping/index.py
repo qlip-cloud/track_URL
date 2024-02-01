@@ -2,6 +2,7 @@ import frappe
 import socket
 import json
 from datetime import datetime
+from qp_validateconnection.services.validate_status import ping
 def get_context(context):
 
     context.server_list = frappe.get_list("qp_vc_Server", filters = {"status": "ON"},fields = ["*"])
@@ -21,16 +22,8 @@ def search_ping(server_list = []):
 
 
     for server in server_list:
-        respuesta = UP
-
-        try:
-            
-            respuesta1 = socket.gethostbyname(server.get("url"))
-            print(respuesta1)
-            
-        except socket.gaierror:
-            
-            respuesta = DOWN
+        
+        respuesta = UP if ping(server.get("url")) == 200 else DOWN
         
         server.update({"ping": respuesta})
 

@@ -8,7 +8,26 @@ import  threading
 import multiprocessing
 from datetime import datetime
 import socket
+import requests
 from frappe.database.mariadb.database import MariaDBDatabase as Database
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+def ping(url):
+
+    status_code = 200
+
+    try:
+
+        response = requests.request("GET", url, timeout=5, verify=False)
+
+        status_code = response.status_code
+
+    except Exception as error:
+
+        status_code = 500
+        
+
+    return status_code
 
 def setup_update(setup = None, method = None):
 
@@ -78,11 +97,9 @@ def execute_thread_2(database):
 
         for url in urls:
             
-            try:
+            response = ping(url.get("url"))
 
-                socket.gethostbyname(url.get("url"))
-
-            except socket.gaierror:
+            if response == 500:
 
                 sql = """
                     INSERT INTO tabqp_vc_ServerLog 

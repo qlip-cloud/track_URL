@@ -5,7 +5,7 @@ from datetime import datetime
 def get_context(context):
 
     context.server_list = frappe.get_list("qp_vc_Server", filters = {"status": "ON"},fields = ["*"])
-    
+
     context.setup = frappe.get_doc("qp_vc_Setup")
 
     context.list_valid = len(context.server_list)
@@ -19,12 +19,14 @@ def search_ping(server_list = []):
 
     server_list = frappe.get_list("qp_vc_Server", filters = {"status": "ON"},fields = ["name", "url"])
 
-    respuesta = UP
 
     for server in server_list:
+        respuesta = UP
+
         try:
             
-            socket.gethostbyname(server.get("url"))
+            respuesta1 = socket.gethostbyname(server.get("url"))
+            print(respuesta1)
             
         except socket.gaierror:
             

@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "creation": "2024-01-26 13:54:05.731424",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "delay",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "delay",
+   "fieldtype": "Int",
+   "label": "Tiempo de Ejecusion (SEG))"
+  },
+  {
+   "default": "Inactivo",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Activo\nInactivo"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-01-26 13:54:05.731424",
+ "modified_by": "Administrator",
+ "module": "Qp Validateconnection",
+ "name": "qp_vc_Setup",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

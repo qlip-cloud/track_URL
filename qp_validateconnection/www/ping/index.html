@@ -1,0 +1,63 @@
+{% extends "frappe/templates/web.html" %}
+
+{% block alphas_js %}
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
+
+<script src="/assets/qp_valleyfloral_front/js/api_connection.js"></script>
+<!-- <script src="/assets/qp_valleyfloral_front/js/select_tooltip.js"></script> -->
+
+
+{% endblock %}
+{% block alphas_ccs %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/qp_valleyfloral_front/css/loader.css">
+<link rel="stylesheet" href="/assets/qp_valleyfloral_front/css/general.css">
+<link rel="stylesheet" href="/assets/qp_valleyfloral_front/css/select_tooltip.css">
+<style>
+    
+    .DOWN {color: red}
+    .UP {color: rgb(0, 199, 0)}
+    
+</style>
+{% endblock %}
+
+    {% block page_content %}
+    <div id = "ping-page" data-status = "{{setup.status}}" data-delay="{{setup.delay}}" data-list_valid="{{list_valid}}">
+
+        <input type = "hidden" id = "delay" value = "{{setup.delay}}">
+        <input type = "hidden" id = "status" value = "{{setup.status}}">
+        {% if setup.status != "Activo"%}
+
+            <div class="alert alert-danger" role="alert">
+                Almacenamiento de Log inactivo, activelo en qp_vc_Setup
+            </div>
+            
+        {%endif%}
+        {% if server_list%}
+            {% for server in server_list%}
+
+            <div class="col-sm-12 shadow p-3 mb-5 bg-white rounded details-container" style="max-width: 100%; margin-right: 0.75em;">
+                <div class="row">
+                    <div class="col-sm-6"> {{server.url}}</div>
+                    <div class="col-sm-3"> 
+                        <span class="" id = 'point-{{server.name}}'>•</span> 
+                        <span id = 'text-{{server.name}}'> Cargando...</span>
+                    </div>
+                    <div class="col-sm-3"> 
+                        <span class="" id = 'date-{{server.name}}'></span> 
+                        </div>
+                </div>
+            </div>
+            {%endfor%}
+        {%else%}
+            <div class="alert alert-danger" role="alert">
+                No hay servidores activos configurados, consulte la lista en qp_vc_Server
+            </div>
+        {%endif%}
+        
+    </div>
+
+    {% endblock %}

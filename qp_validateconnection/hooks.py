@@ -89,13 +89,19 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
+    "qp_vc_Setup": {
+ 		"on_update": "qp_validateconnection.services.validate_status.setup_update"         
+	},
+    "qp_vc_Server": {
+ 		"on_update": "qp_validateconnection.services.validate_status.server_update"         
+	}
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 #	}
-# }
+}
 
 # Scheduled Tasks
 # ---------------
@@ -116,7 +122,29 @@ app_license = "MIT"
 # 	"monthly": [
 # 		"qp_validateconnection.tasks.monthly"
 # 	]
-# }
+scheduler_events = {
+# 	"all": [
+# 		"qp_middleware.tasks.all"
+# 	],
+# 	"daily": [
+# 		"qp_middleware.tasks.daily"
+# 	],
+# 	"hourly": [
+# 		"qp_middleware.tasks.hourly"
+# 	],
+# 	"weekly": [
+# 		"qp_middleware.tasks.weekly"
+# 	]
+# 	"monthly": [
+# 		"qp_middleware.tasks.monthly"
+# 	]
+	"cron": {
+		"*/1 * * * *": [
+			"qp_validateconnection.services.validate_status.handler"
+		]
+	}
+	
+}
 
 # Testing
 # -------

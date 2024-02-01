@@ -105,6 +105,6 @@ def execute_thread_2(database):
             
 def is_status_true(cache):
 
-    cache_value = cache.get("status").decode('utf-8')
+    cache_value = cache.get("status").decode('utf-8') if cache.get("status") else ""
     
     return True if cache_value == 'True' else False

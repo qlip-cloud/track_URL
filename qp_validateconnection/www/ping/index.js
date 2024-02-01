@@ -9,7 +9,9 @@ $(document).ready(function() {
             active_ping()
 
             delay = delay * 1000;
-        
+            
+            exec_ping()
+            
             setInterval(exec_ping,delay)
         }
       }

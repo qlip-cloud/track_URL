@@ -93,8 +93,6 @@ def execute_thread_2(database):
 
         urls = json.loads(cache.get("urls"))
 
-        cache.set("ping", "ON")
-
         for url in urls:
             
             response = ping(url.get("url"))
@@ -117,6 +115,15 @@ def execute_thread_2(database):
                             "Administrator",
                             0
                         )
+            
+                database.sql(sql,auto_commit=True)
+
+                sql = """
+                    update tabqp_vc_Server set last_connection = '{}' where name = '{}'
+                """.format(
+                        datetime.now(), 
+                        url.get("name")
+                    )
             
                 database.sql(sql,auto_commit=True)
             

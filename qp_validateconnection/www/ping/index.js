@@ -31,19 +31,27 @@ function active_ping(){
 }
 function exec_ping(){
 
-    url = "qp_validateconnection.www.ping.index.search_ping"
+    if ( $("#ping-page").length ) {
 
-    callback = (response)=>{
-        response.forEach(element => {
-            $(`#point-${element.name}`).removeClass().addClass(element.ping);
-            $(`#text-${element.name}`).html(element.ping)
-            $(`#text-${element.name}`).html(element.ping)
-            $(`#date-${element.name}`).html(element.ping_refresh)
-            
-        });
+        url = "qp_validateconnection.www.ping.index.search_ping"
+
+        callback = (response)=>{
+
+            response.forEach(element => {
+                $(`#block-${element.name}`).appendTo("#list_ping")
+
+                $(`#point-${element.name}`).removeClass().addClass(element.ping);
+                $(`#text-${element.name}`).html(element.ping)
+                $(`#text-${element.name}`).html(element.ping)
+                $(`#date-${element.name}`).html(element.ping_refresh)
+                $(`#last_connection-${element.name}`).html(element.last_connection)
+                
+            });
+
+        }
+
+        send_petition(url, callback)
     }
-
-    send_petition(url, callback)
 }
 
 

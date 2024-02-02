@@ -6,7 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "url",
-  "status"
+  "status",
+  "last_connection"
  ],
  "fields": [
   {
@@ -22,11 +23,16 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "ON\nOFF"
+  },
+  {
+   "fieldname": "last_connection",
+   "fieldtype": "Datetime",
+   "label": "last_connection"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-31 14:38:57.870383",
+ "modified": "2024-02-01 19:05:21.449481",
  "modified_by": "Administrator",
  "module": "Qp Validateconnection",
  "name": "qp_vc_Server",

@@ -18,8 +18,7 @@ def search_ping(server_list = []):
     UP = "UP"
     DOWN = "DOWN"
 
-    server_list = frappe.get_list("qp_vc_Server", filters = {"status": "ON"},fields = ["name", "url"])
-
+    server_list = frappe.get_list("qp_vc_Server", filters = {"status": "ON"},fields = ["name", "url", 'last_connection'], order_by='last_connection desc')
 
     for server in server_list:
         
@@ -28,6 +27,7 @@ def search_ping(server_list = []):
         server.update({"ping": respuesta})
 
         server.update({"ping_refresh": datetime.now().strftime('%d-%m-%Y %H:%M:%S') })
+        server.update({"last_connection": server.get("last_connection").strftime('%d-%m-%Y %H:%M:%S') if server.get("last_connection") else ''})
 
     return server_list
     
